@@ -1,0 +1,827 @@
+[
+    {
+        "id": "1be8d27b643c658f",
+        "type": "aedes broker",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "",
+        "mqtt_port": "8883",
+        "mqtt_ws_bind": "port",
+        "mqtt_ws_port": "",
+        "mqtt_ws_path": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "mqtt-server-new.crt",
+        "keyname": "mqtt-server-new.key",
+        "caname": "ca.crt",
+        "persistence_bind": "memory",
+        "dburl": "",
+        "persist_to_file": false,
+        "usetls": true,
+        "x": 210,
+        "y": 280,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "1a9d9fd7747f93e0",
+        "type": "inject",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 220,
+        "wires": [
+            [
+                "3abbf5c0b2dcf62c"
+            ]
+        ]
+    },
+    {
+        "id": "6a311ffe6b2ceda9",
+        "type": "mqtt out",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "factory/temperature",
+        "topic": "factory/temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5cb8f383afdd007d",
+        "x": 870,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "b07a5ca68f5bdb18",
+        "type": "mqtt in",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "",
+        "topic": "factory/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "20e2606d5aa4368a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1030,
+        "y": 180,
+        "wires": [
+            [
+                "5f71d86599c06422"
+            ]
+        ]
+    },
+    {
+        "id": "dbb8a5d9f55e6529",
+        "type": "debug",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1580,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b29011fb95899fdd",
+        "type": "OpcUa-Server",
+        "z": "d4eb480a7a3c4fbb",
+        "port": "53880",
+        "name": "",
+        "endpoint": "UA/SimpleNodeRedServer",
+        "usersFile": "",
+        "nodesetDir": "",
+        "autoAcceptUnknownCertificate": true,
+        "registerToDiscovery": false,
+        "constructDefaultAddressSpace": true,
+        "allowAnonymous": true,
+        "endpointNone": false,
+        "endpointSign": false,
+        "endpointSignEncrypt": true,
+        "endpointBasic128Rsa15": true,
+        "endpointBasic256": true,
+        "endpointBasic256Sha256": true,
+        "maxNodesPerBrowse": 0,
+        "maxNodesPerHistoryReadData": 0,
+        "maxNodesPerHistoryReadEvents": 0,
+        "maxNodesPerHistoryUpdateData": 0,
+        "maxNodesPerRead": 0,
+        "maxNodesPerWrite": 0,
+        "maxNodesPerMethodCall": 0,
+        "maxNodesPerRegisterNodes": 0,
+        "maxNodesPerNodeManagement": 0,
+        "maxMonitoredItemsPerCall": 0,
+        "maxNodesPerHistoryUpdateEvents": 0,
+        "maxNodesPerTranslateBrowsePathsToNodeIds": 0,
+        "maxConnectionsPerEndpoint": 20,
+        "maxMessageSize": 4096,
+        "maxBufferSize": 4096,
+        "maxSessions": 20,
+        "x": 800,
+        "y": 560,
+        "wires": [
+            [
+                "4317ebfa947edead"
+            ]
+        ]
+    },
+    {
+        "id": "4b5fc35fc68c22db",
+        "type": "OpcUa-Item",
+        "z": "d4eb480a7a3c4fbb",
+        "item": "ns=1;s=MachineTemp",
+        "datatype": "String",
+        "value": "",
+        "name": "",
+        "x": 760,
+        "y": 480,
+        "wires": [
+            [
+                "7457631951e298d3"
+            ]
+        ]
+    },
+    {
+        "id": "7457631951e298d3",
+        "type": "OpcUa-Client",
+        "z": "d4eb480a7a3c4fbb",
+        "endpoint": "896ab73159dd237e",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": false,
+        "name": "",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 1060,
+        "y": 480,
+        "wires": [
+            [
+                "48882cf3ebb6c527",
+                "8543c719e8d47d56"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "3abbf5c0b2dcf62c",
+        "type": "function",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "Alternating Sensor",
+        "func": "let count = flow.get('mqtt_count') || 0;\ncount++;\n\nconst SECRET_TOKEN = \"SEMINAR-SECURE-KEY-2026\"; \n\nlet temp = (80 + (Math.random() * 10 - 5)).toFixed(2);\nlet timeStamp = Date.now();\n\nmsg.payload = temp + \"|\" + timeStamp + \"|\" + SECRET_TOKEN;\nflow.set('mqtt_count', count);\n\nnode.status({fill: \"green\", shape: \"dot\", text: \"Signed & Transmitted (\" + count + \")\"});\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 220,
+        "wires": [
+            [
+                "a9fe32be6bf12304",
+                "cf67d30165c40571",
+                "65a0b20e4e8287ad"
+            ]
+        ]
+    },
+    {
+        "id": "5f71d86599c06422",
+        "type": "function",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "Calculate MQTT Latency",
+        "func": "const EXPECTED_TOKEN = \"SEMINAR-SECURE-KEY-2026\";\nlet receiveTime = Date.now();\nlet parts = String(msg.payload).split(\"|\");\n\n\nif (parts.length < 3 || parts[2] !== EXPECTED_TOKEN) {\n    msg.payload = \"🚨 ATTACK BLOCKED | Unauthorized payload: \" + parts[0];\n    node.status({fill:\"red\", shape:\"dot\", text:\"Intrusion Blocked!\"});\n    return msg; \n}\n\n\nlet data = parts[0];\nlet sendTime = parseInt(parts[1]);\nlet latency = receiveTime - sendTime;\n\nmsg.payload = \"Latency: \" + latency + \" ms | Data: \" + data + \"°C | ✅ VERIFIED\";\nnode.status({fill:\"green\", shape:\"dot\", text:\"Secure Data Passed\"});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1310,
+        "y": 220,
+        "wires": [
+            [
+                "dbb8a5d9f55e6529",
+                "1dfea802c9204717"
+            ]
+        ]
+    },
+    {
+        "id": "48882cf3ebb6c527",
+        "type": "function",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "Calculate OPC Latency",
+        "func": "const EXPECTED_TOKEN = \"SEMINAR-SECURE-KEY-2026\";\nlet receiveTime = Date.now();\n\n\nif (!msg.topic || msg.topic !== \"ns=1;s=MachineTemp\") return null;\n\nlet raw = msg.payload;\nif (Array.isArray(raw)) raw = raw[0];\nif (raw && raw.value !== undefined) raw = raw.value;\nif (raw && raw.value !== undefined) raw = raw.value; \n\nlet parts = String(raw).split(\"|\");\n\n\n\nif (parts.length < 3 || parts[2] !== EXPECTED_TOKEN) {\n    msg.payload = \"🚨 ATTACK BLOCKED | Unauthorized payload: \" + parts[0];\n    node.status({fill:\"red\", shape:\"dot\", text:\"Intrusion Blocked!\"});\n    return msg; \n}\n\nlet data = parseFloat(parts[0]).toFixed(2);\nlet sendTime = parseInt(parts[1]);\nlet latency = receiveTime - sendTime;\n\nmsg.payload = \"Latency: \" + latency + \" ms | Data: \" + data + \"°C | ✅ VERIFIED\";\nnode.status({fill:\"green\", shape:\"dot\", text:\"Secure Data Passed\"});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 480,
+        "wires": [
+            [
+                "dbb8a5d9f55e6529",
+                "506539058d5a211b"
+            ]
+        ]
+    },
+    {
+        "id": "dc5f7b2745926f92",
+        "type": "inject",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "Init Server",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 560,
+        "wires": [
+            [
+                "bac05f3c6290bcf1"
+            ]
+        ]
+    },
+    {
+        "id": "bac05f3c6290bcf1",
+        "type": "function",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "Build Address Space",
+        "func": "msg.topic = \"ns=1;s=MachineTemp;datatype=String\";\nmsg.payload = {\n    opcuaCommand: \"addVariable\",\n    browseName: \"MachineTemp\",\n    nodeId: \"ns=1;s=MachineTemp\",\n    datatype: \"String\",\n    value: \"\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 560,
+        "wires": [
+            [
+                "b29011fb95899fdd"
+            ]
+        ]
+    },
+    {
+        "id": "a9fe32be6bf12304",
+        "type": "function",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "Update OPC UA",
+        "func": "msg.topic = \"ns=1;s=MachineTemp;datatype=String\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 360,
+        "wires": [
+            [
+                "de737fcdef085708",
+                "43b3329313660a19",
+                "4b5fc35fc68c22db"
+            ]
+        ]
+    },
+    {
+        "id": "1dfea802c9204717",
+        "type": "ui_text",
+        "z": "d4eb480a7a3c4fbb",
+        "group": "90b61fb85d6ccd8d",
+        "order": 0,
+        "width": "6",
+        "height": "2",
+        "name": "",
+        "label": "MQTT Real-Time Stream",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1630,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "506539058d5a211b",
+        "type": "ui_text",
+        "z": "d4eb480a7a3c4fbb",
+        "group": "90b61fb85d6ccd8d",
+        "order": 1,
+        "width": "6",
+        "height": "2",
+        "name": "",
+        "label": "OPC UA Real-Time Stream",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1660,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "cf67d30165c40571",
+        "type": "delay",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1060,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4317ebfa947edead",
+        "type": "debug",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "8543c719e8d47d56",
+        "type": "debug",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "de737fcdef085708",
+        "type": "debug",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 220,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "43b3329313660a19",
+        "type": "OpcUa-Client",
+        "z": "d4eb480a7a3c4fbb",
+        "endpoint": "896ab73159dd237e",
+        "action": "write",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": false,
+        "name": "",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 780,
+        "y": 360,
+        "wires": [
+            [
+                "64a40076d76af7e9"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "64a40076d76af7e9",
+        "type": "debug",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "0a039c759f61ec80",
+        "type": "inject",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "Hacker (MQTT)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 400,
+        "y": 120,
+        "wires": [
+            [
+                "c028277630a20672"
+            ]
+        ]
+    },
+    {
+        "id": "c028277630a20672",
+        "type": "function",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "Spoof MQTT",
+        "func": "msg.payload = \"999.99|\" + Date.now(); \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 120,
+        "wires": [
+            [
+                "6a311ffe6b2ceda9"
+            ]
+        ]
+    },
+    {
+        "id": "917b3840305570d8",
+        "type": "inject",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "Hacker (OPC UA)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 680,
+        "wires": [
+            [
+                "8d08ebb5b97bf3e0"
+            ]
+        ]
+    },
+    {
+        "id": "8d08ebb5b97bf3e0",
+        "type": "function",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "Spoof OPC",
+        "func": "msg.topic = \"ns=1;s=MachineTemp;datatype=String\";\nmsg.payload = \"999.99\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 680,
+        "wires": [
+            [
+                "53e1fc8d98441116",
+                "4b5fc35fc68c22db"
+            ]
+        ]
+    },
+    {
+        "id": "53e1fc8d98441116",
+        "type": "OpcUa-Client",
+        "z": "d4eb480a7a3c4fbb",
+        "endpoint": "52216d9020d2833a",
+        "action": "write",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": false,
+        "name": "Hack OPC Client",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 770,
+        "y": 680,
+        "wires": [
+            [
+                "55793f97f2ee646a"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "55793f97f2ee646a",
+        "type": "debug",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "65a0b20e4e8287ad",
+        "type": "mqtt out",
+        "z": "d4eb480a7a3c4fbb",
+        "name": "",
+        "topic": "factory/temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "20e2606d5aa4368a",
+        "x": 810,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "5cb8f383afdd007d",
+        "type": "mqtt-broker",
+        "name": "Hacker Connection",
+        "broker": "localhost",
+        "port": "8883",
+        "tls": "b9a9de802c061e5d",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "20e2606d5aa4368a",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "8883",
+        "tls": "c78880a0a651114b",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "896ab73159dd237e",
+        "type": "OpcUa-Endpoint",
+        "name": "",
+        "endpoint": "opc.tcp://localhost:53880/UA/SimpleNodeRedServer",
+        "secpol": "Basic256Sha256",
+        "secmode": "SignAndEncrypt",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "90b61fb85d6ccd8d",
+        "type": "ui_group",
+        "name": "Protocol Monitor",
+        "tab": "2bcd1598750f2d0b",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "52216d9020d2833a",
+        "type": "OpcUa-Endpoint",
+        "name": "Hack",
+        "endpoint": "opc.tcp://localhost:53880/UA/SimpleNodeRedServer",
+        "secpol": "Basic192",
+        "secmode": "SignAndEncrypt",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "b9a9de802c061e5d",
+        "type": "tls-config",
+        "name": "Hacker_TLS",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "mqtt-hacker-new.crt",
+        "keyname": "mqtt-hacker-new.key",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "c78880a0a651114b",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "mqtt-server-new.crt",
+        "keyname": "mqtt-server-new.key",
+        "caname": "ca.crt",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "2bcd1598750f2d0b",
+        "type": "ui_tab",
+        "name": "IIoT Dashboard",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "6b73e5df1c81e145",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-aedes": "1.2.0",
+            "node-red-contrib-opcua": "0.2.352",
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
